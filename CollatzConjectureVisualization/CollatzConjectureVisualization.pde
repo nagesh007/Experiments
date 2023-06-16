@@ -10,7 +10,7 @@
  
  @author Nagesh M H
  
-*/
+ */
 
 
 int maxNum=100;
@@ -22,13 +22,15 @@ int extraHeight;
 IntList series;
 int startX, startY;
 ParticleSystem ps;
+PFont font;
+int fontSize=34;
 
 void setup()
 {
   size(1920, 1080, P2D);
   background(0);
 
-  extraHeight=height+75;
+  extraHeight=height+50;
 
   startX=width/2;
   startY=height/2;
@@ -49,6 +51,12 @@ void setup()
     series.reverse();
     cal();
   }
+
+
+
+  // create Font
+  font=createFont("JosefinSansRegular.ttf", fontSize);
+  textFont(font);
 }
 
 
@@ -109,10 +117,11 @@ void cal()
 
 void dispText()
 {
+  fill(#FBAB7E);
+  textSize(fontSize);
+  text("Collatz  Conjecture  Visualization", 50, 80);
   fill(255);
-  textSize(32);
-  text("Collatz Conjecture Visualization", 50, 80);
-  textSize(26);
+  textSize(28);
   text("Max Number  : "+maxNum, 50, 150);
   text("Number of Particles  : "+ps.getSize(), 50, 200);
   text("Frame Rate  : "+int(frameRate), 50, 250);
