@@ -25,10 +25,14 @@ ParticleSystem ps;
 PFont font;
 int fontSize=34;
 
+boolean start=true;
+
+
 void setup()
 {
   size(1920, 1080, P2D);
   background(0);
+
 
   extraHeight=height+50;
 
@@ -63,10 +67,26 @@ void setup()
 void draw()
 {
   background(0);
-  dispText();
-  ps.run();
+
+  if (start)
+  {
+    dispText();
+    ps.run();
+  }
 }
 
+
+void keyPressed()
+{
+  if (key==' ')
+  {
+    start=true;
+  }
+  if (key=='s')
+  {
+    saveFrame("screen.png");
+  }
+}
 
 int collatz(int n)
 {
@@ -87,19 +107,23 @@ void cal()
   //int r=0; // radius
   float rotation=0; //  theta
   PVector firstPoint=new PVector(startX, startY);
-  ps.addParticle(firstPoint);
+  int c=#ffffff;
+  ps.addParticle(firstPoint, c);
 
   for (int i=1; i<series.size(); i++)
   {
+
     int value=series.get(i);
     if (value%2==0)
     {
       // even
       rotation+=angle;
+      //c=#77aaff;
     } else
     {
       // odd
       rotation+=-angle;
+      //c=#FEE140;
     }
 
     // convert polar co-ordinates to cartesian
@@ -108,7 +132,7 @@ void cal()
     PVector newPoint=new PVector(x, y);
     PVector temp=PVector.add(firstPoint, newPoint);
     firstPoint=temp;
-    ps.addParticle(temp);
+    ps.addParticle(temp, c);
   }
   angle+=0.001;
   series.clear();
@@ -117,7 +141,7 @@ void cal()
 
 void dispText()
 {
-  fill(#FBAB7E);
+  fill(#F76B1C);
   textSize(fontSize);
   text("Collatz  Conjecture  Visualization", 50, 80);
   fill(255);

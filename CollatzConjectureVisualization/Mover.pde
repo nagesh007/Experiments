@@ -17,17 +17,21 @@ class Mover {
   float mass, maxSpeed, maxForce;
   PVector pos, acceleration, velocity, target;
 
+  color c;
 
-  Mover(PVector loc, float maxSpeed, float maxForce)
+  Mover(PVector loc, float maxSpeed, float maxForce, color c)
   {
-    this.pos=new PVector(random(width), random(height, extraHeight));
+    //this.pos=new PVector(random(width), random(height, extraHeight));
+    this.pos=new PVector(startX,startY);
     this.target=loc.copy();
     this.acceleration=new PVector(0, 0);
     this.velocity=new PVector(0, 0);
-
+    
     this.maxSpeed=maxSpeed;
     this.maxForce=maxForce;
     this.mass=1;
+    
+    this.c=c;
   }
 
 
@@ -67,8 +71,9 @@ class Mover {
 
   void display()
   {
-    fill(255, 50);
-    stroke(255);
+    //fill(255, 50);
+    fill(c,50);
+    stroke(c);
     ellipse(pos.x, pos.y, 4, 4);
   }
 }

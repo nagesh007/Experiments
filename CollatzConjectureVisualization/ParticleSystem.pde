@@ -24,11 +24,11 @@ class ParticleSystem {
   }
 
 
-  void addParticle(PVector pt)
+  void addParticle(PVector pt, int c)
   {
-    float maxSpeed=random(4, 7);
+    float maxSpeed=random(5, 8);
     float maxForce=random(0.1, 0.3);
-    Mover m=new Mover(pt, maxSpeed, maxForce);
+    Mover m=new Mover(pt, maxSpeed, maxForce,c);
     list.add(m);
   }
 
@@ -40,9 +40,11 @@ class ParticleSystem {
 
   void run()
   {
+    PVector wind=new PVector(0.09 ,0.01);
     for (Mover m : list)
     {
       m.arrive();
+      m.applyForce(wind);
       m.update();
       m.display();
     }
